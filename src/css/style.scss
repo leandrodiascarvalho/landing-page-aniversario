@@ -1,0 +1,202 @@
+:root {
+  --primary-color: #0044cc;
+  --secondary-color: #87aaff;
+  --accent-color: #56b0eb;
+  --bg-color: #f0f8ff;
+  --danger-color: #ff3b30;
+  --success-color: #28a745;
+  --gradient-red: linear-gradient(45deg, #ff6f61, #ff3b30, #d32f2f);
+  --font-family: "Arial", sans-serif;
+}
+
+/* Card principal */
+.header-container {
+  width: 350px;
+  max-width: 98vw;
+  height: 600px;
+  background-color: var(--primary-color);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  margin: 50px auto;
+  text-align: center;
+  color: var(--bg-color);
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Título */
+.title {
+  font-size: 2rem;
+  color: var(--bg-color);
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  word-break: break-word;
+}
+
+/* Destaque */
+.class-destaque {
+  background: var(--gradient-red);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  padding: 0 5px;
+  font-weight: bold;
+}
+
+/* Coração animado */
+.heart {
+  font-size: 2rem;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.heart:hover {
+  transform: scale(1.5);
+  color: var(--accent-color);
+}
+
+@keyframes heart-beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  20%,
+  60% {
+    transform: scale(1.3);
+  }
+  40%,
+  80% {
+    transform: scale(1);
+  }
+}
+
+.heart.pulsar {
+  animation: heart-beat 1s infinite;
+}
+
+/* Bolo e cone */
+.cake-container {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 150px;
+  margin: 20px;
+}
+
+.cake-image {
+  width: 100%;
+}
+
+.cone-image {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+}
+
+/* Balões nos cantos */
+.top-elements {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.balloons-left,
+.balloons-right {
+  width: 40px;
+}
+
+.balloon {
+  width: 100%;
+  height: auto;
+}
+
+/* Cronômetro e mensagem */
+.countdown-box {
+  margin-top: 50px;
+}
+
+.message {
+  font-size: 1.5rem;
+  color: var(--success-color);
+  font-weight: bold;
+}
+
+/* Botão de surpresa */
+#surpriseButton {
+  margin-top: 1rem;
+}
+
+/* Botão transparente (opcional) */
+.btn-transparent {
+  background: none;
+  border: 2px solid var(--secondary-color);
+}
+
+/* Responsividade */
+@media (max-width: 500px) {
+  .header-container {
+    width: 100vw;
+    min-width: 0;
+    height: auto;
+    padding: 10px;
+    margin: 20px auto;
+  }
+
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+
+  .cake-container {
+    width: 100px;
+    margin: 10px;
+  }
+
+  .cone-image {
+    width: 28px;
+    top: -25px;
+  }
+
+  .top-elements {
+    top: 10px;
+  }
+
+  .balloons-left,
+  .balloons-right {
+    width: 28px;
+  }
+
+  .countdown-box {
+    margin-top: 30px;
+    font-size: 1.5rem;
+  }
+
+  .message {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .header-container {
+    width: 100vw;
+    padding: 4px;
+  }
+  .title {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+}

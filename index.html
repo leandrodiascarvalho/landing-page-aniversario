@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page de Aniversário</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/src/css/style.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row justify-content-center text-center">
+      <div class="col-12">
+        <header class="header-container">
+          <!-- Bandeirinhas removidas -->
+
+          <!-- Título -->
+          <h1 class="title animate__animated animate__fadeInDown mt-0">
+            Feliz Aniversário <span class="class-destaque">Mãe</span>
+            <span class="heart pulsar">❤️</span>
+          </h1>
+
+          <!-- Bolo e Cone -->
+          <section class="cake-container animate__animated animate__bounceInLeft my-4">
+            <img src="./src/img/bolo.png" alt="Bolo" class="cake-image img-fluid">
+            <img src="./src/img/cone_festa.png" alt="Cone de Festa" class="cone-image img-fluid">
+          </section>
+
+          <!-- Balões nos cantos -->
+          <div class="top-elements d-flex justify-content-between">
+            <div class="balloons-left animate__animated animate__fadeInLeft">
+              <img src="/src/img/baloes.png" alt="Balões à esquerda" class="balloon img-fluid">
+            </div>
+            <div class="balloons-right animate__animated animate__fadeInRight">
+              <img src="/src/img/baloes.png" alt="Balões à direita" class="balloon img-fluid">
+            </div>
+          </div>
+
+          <!-- Cronômetro e Botão -->
+          <section id="countdown" class="countdown-box animate__animated animate__fadeInUp my-4"></section>
+          <button id="surpriseButton" class="btn btn-primary d-none mt-3" onclick="showMessage()">Clique para Surpresa!</button>
+          <div id="message" class="message d-none mt-3"></div>
+        </header>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/src/js/script.js"></script>
