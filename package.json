@@ -4,14 +4,15 @@
   "description": "Construção de uma pagina de evento utilizando HTML, CSS, JS, BOOTSTRAP , JQUERY, SASS, PARCEL.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url ./"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leandrodiascarvalho/landing-page-aniversario.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "leandro dias carvalho",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
