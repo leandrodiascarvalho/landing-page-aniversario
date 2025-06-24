@@ -174,16 +174,13 @@ var snowColors = ["#1e3a8a",
 // cinza médio
 "#607d8b" // cinza escuro
 ];
-var snowflakeContainer = document.querySelector(".birthday-container__floating-elements");
+var snowflakeContainer = document.getElementById("snowflakes");
 var snowflakeChar = "❄";
 var snowflakeCount = 20;
 function randomBetween(min, max) {
   return Math.random() * (max - min) + min;
 }
-function createSnowflake() {
-  var flake = document.createElement("span");
-  flake.className = "birthday-container__snowflake";
-  flake.textContent = snowflakeChar;
+function setSnowflakeStyle(flake) {
   flake.style.left = "".concat(randomBetween(0, 100), "%");
   flake.style.fontSize = "".concat(randomBetween(16, 32), "px");
   flake.style.color = snowColors[Math.floor(Math.random() * snowColors.length)];
@@ -193,6 +190,23 @@ function createSnowflake() {
   flake.style.animationDelay = "".concat(randomBetween(0, 8), "s");
   flake.style.position = "absolute";
   flake.style.top = "-5%";
+}
+function createSnowflake() {
+  var flake = document.createElement("span");
+  flake.className = "birthday-container__snowflake";
+  flake.textContent = snowflakeChar;
+  setSnowflakeStyle(flake);
+
+  // Quando a animação termina, reinicia o floco com novos valores
+  flake.addEventListener("animationend", function () {
+    setSnowflakeStyle(flake);
+    // Força o reflow para reiniciar a animação
+    flake.style.animationName = "none";
+    // Pequeno timeout para garantir o reset
+    setTimeout(function () {
+      flake.style.animationName = "snow-fall";
+    }, 10);
+  });
   return flake;
 }
 

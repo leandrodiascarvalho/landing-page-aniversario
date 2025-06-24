@@ -53,9 +53,7 @@ const snowColors = [
   "#607d8b", // cinza escuro
 ];
 
-const snowflakeContainer = document.querySelector(
-  ".birthday-container__floating-elements"
-);
+const snowflakeContainer = document.getElementById("snowflakes");
 const snowflakeChar = "❄";
 const snowflakeCount = 20;
 
@@ -63,10 +61,7 @@ function randomBetween(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-function createSnowflake() {
-  const flake = document.createElement("span");
-  flake.className = "birthday-container__snowflake";
-  flake.textContent = snowflakeChar;
+function setSnowflakeStyle(flake) {
   flake.style.left = `${randomBetween(0, 100)}%`;
   flake.style.fontSize = `${randomBetween(16, 32)}px`;
   flake.style.color = snowColors[Math.floor(Math.random() * snowColors.length)];
@@ -76,6 +71,25 @@ function createSnowflake() {
   flake.style.animationDelay = `${randomBetween(0, 8)}s`;
   flake.style.position = "absolute";
   flake.style.top = "-5%";
+}
+
+function createSnowflake() {
+  const flake = document.createElement("span");
+  flake.className = "birthday-container__snowflake";
+  flake.textContent = snowflakeChar;
+  setSnowflakeStyle(flake);
+
+  // Quando a animação termina, reinicia o floco com novos valores
+  flake.addEventListener("animationend", () => {
+    setSnowflakeStyle(flake);
+    // Força o reflow para reiniciar a animação
+    flake.style.animationName = "none";
+    // Pequeno timeout para garantir o reset
+    setTimeout(() => {
+      flake.style.animationName = "snow-fall";
+    }, 10);
+  });
+
   return flake;
 }
 
