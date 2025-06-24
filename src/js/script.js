@@ -1,44 +1,88 @@
-// Função para exibir a mensagem de surpresa
-function showMessage() {
-  // Mostra a mensagem de surpresa e o botão de surpresa
-  document.getElementById("message").classList.remove("d-none");
-  document.getElementById("message").textContent = "Parabéns, Mãe! 🎉🎂";
-
-  // Esconde o botão de surpresa
-  document.getElementById("surpriseButton").classList.add("d-none");
-}
-
-// Função para iniciar o cronômetro
-function startCountdown() {
-  const countdownElement = document.getElementById("countdown");
-
-  // Define a data final (data do aniversário)
-  const targetDate = new Date("2025-06-24T00:00:00").getTime();
-
-  // Atualiza o cronômetro a cada segundo
-  const interval = setInterval(() => {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    // Calcula dias, horas, minutos e segundos restantes
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // Exibe o cronômetro
-    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-    // Quando o cronômetro chegar a 0, exibe o botão de surpresa
-    if (distance < 0) {
-      clearInterval(interval); // Para o cronômetro
-      countdownElement.innerHTML = "Feliz Aniversário!";
-      document.getElementById("surpriseButton").classList.remove("d-none"); // Exibe o botão de surpresa
+$(document).ready(function () {
+  // Função para adicionar a data 24 de Julho de 2025 usando Date.js
+  function addEventDate() {
+    // Use new Date para garantir um objeto Date.js, se disponível
+    let eventDate = Date.parse("24th July, 2025");
+    // Se Date.js não estiver funcionando, Date.parse retorna um número (timestamp)
+    if (typeof eventDate === "number") {
+      eventDate = new Date(eventDate);
     }
-  }, 1000); // Atualiza o cronômetro a cada 1 segundo
+
+    // Verifica se o método toString do Date.js está disponível
+    let formattedDate;
+    if (
+      typeof eventDate.toString === "function" &&
+      eventDate.toString.length > 0
+    ) {
+      try {
+        formattedDate = eventDate.toString("dddd, MMMM d, yyyy");
+      } catch (e) {
+        formattedDate = eventDate.toLocaleDateString("pt-BR", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
+    } else {
+      formattedDate = eventDate.toLocaleDateString("pt-BR", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+
+    console.log("Data do Evento: ", formattedDate);
+    $("#event-date").text(`${formattedDate}`);
+  }
+
+  // Chamada da função para adicionar a data
+  addEventDate();
+});
+
+// Cores em tons de azul e cinza
+const snowColors = [
+  "#1e3a8a", // primary blue
+  "#3b82f6", // secondary blue
+  "#87ceeb", // light blue
+  "#add8e6", // lighter blue
+  "#b0e0e6", // lightest blue
+  "#b0bec5", // cinza claro
+  "#90a4ae", // cinza médio
+  "#607d8b", // cinza escuro
+];
+
+const snowflakeContainer = document.querySelector(
+  ".birthday-container__floating-elements"
+);
+const snowflakeChar = "❄";
+const snowflakeCount = 20;
+
+function randomBetween(min, max) {
+  return Math.random() * (max - min) + min;
 }
 
-// Inicializa o cronômetro quando a página for carregada
-window.onload = startCountdown;
+function createSnowflake() {
+  const flake = document.createElement("span");
+  flake.className = "birthday-container__snowflake";
+  flake.textContent = snowflakeChar;
+  flake.style.left = `${randomBetween(0, 100)}%`;
+  flake.style.fontSize = `${randomBetween(16, 32)}px`;
+  flake.style.color = snowColors[Math.floor(Math.random() * snowColors.length)];
+  flake.style.opacity = randomBetween(0.6, 1).toFixed(2);
+  flake.style.animationName = "snow-fall";
+  flake.style.animationDuration = `${randomBetween(8, 16)}s`;
+  flake.style.animationDelay = `${randomBetween(0, 8)}s`;
+  flake.style.position = "absolute";
+  flake.style.top = "-5%";
+  return flake;
+}
+
+// Limpa flocos antigos
+snowflakeContainer.innerHTML = "";
+
+// Cria flocos
+for (let i = 0; i < snowflakeCount; i++) {
+  snowflakeContainer.appendChild(createSnowflake());
+}
